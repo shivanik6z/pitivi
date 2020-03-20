@@ -290,5 +290,7 @@ class MainWindow(Gtk.ApplicationWindow, Loggable):
         # The window must be shown only after setting the headerbar with
         # set_titlebar. Otherwise we get a warning things can go wrong.
         self.show()
+        #supposed to iterates the widget hierarchy in the perspective's self.toplevel_widget
+        perspective.find_base_tabs()
         self.add(perspective.toplevel_widget)
         perspective.refresh()

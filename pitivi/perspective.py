@@ -38,3 +38,8 @@ class Perspective():
     def refresh(self):
         """Refreshes the perspective while activating it."""
         raise NotImplementedError()
+        
+    def find_base_tabs(self):
+        #supposed to return basetabs widget but couldn't figure out how
+        return self.toplevel_widget
+    
