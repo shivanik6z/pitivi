@@ -107,7 +107,9 @@ class BaseTabs(Gtk.Notebook, Loggable):
         notebook = Gtk.Notebook()
         notebook.props.show_tabs = False
         window.add(notebook)
-        window.show_all()
+        #replaced by window.show_all()
+        #to create detached tabs hidden by default
+        notebook.show_all()
         window.move(x, y)
         window.connect(
             "configure-event", self.__detached_window_configure_cb,
@@ -157,3 +159,14 @@ class BaseTabs(Gtk.Notebook, Loggable):
                                          default=0)
 
         self.settings.read_setting_section_from_file(child_name)
+      
+    def set_detached_tabs_visibility(self,child):
+       #gets child's name
+       child_name = self.get_tab_label(child).get_text()
+       #this fun probably returns bool value if child is detached or not
+       #if it's docked it should be visible else not
+       if getattr(self.settings, child_name + "docked") == False:
+            Gtk.Widget.props.visible = False
+       elif getattr(self.settings, child_name + "docked") == True:
+            Gtk.Widget.props.visible = True  
+      
